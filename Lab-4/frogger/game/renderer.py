@@ -52,4 +52,7 @@ def draw_text(surface, font, text, pos, color=COLOR_TEXT):
 def draw_banner(surface, font, text):
     surf = font.render(text, True, (255, 220, 80))
     rect = surf.get_rect(center=(surface.get_width() // 2, surface.get_height() // 2))
+    box = rect.inflate(24, 16)
+    pygame.draw.rect(surface, (15, 15, 20), box, border_radius=8)
+    pygame.draw.rect(surface, (255, 220, 80), box, width=2, border_radius=8)
     surface.blit(surf, rect)
