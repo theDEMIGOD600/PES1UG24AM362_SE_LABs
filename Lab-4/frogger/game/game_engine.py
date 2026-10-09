@@ -14,6 +14,7 @@ from game.renderer import (
 )
 
 LANE_SPEEDS = [1.5, -2, 2, -2.5, 1.5, -2]   # one entry per road row, alternating direction
+ATTEMPT_TIME_LIMIT = 30.0                    # 30-second countdown per attempt
 
 
 class GameEngine:
@@ -21,6 +22,8 @@ class GameEngine:
         self.max_lives = 3
         self.lives = self.max_lives
         self.score = 0
+        self.attempt_time_limit = ATTEMPT_TIME_LIMIT
+        self.time_remaining = self.attempt_time_limit
         self.game_over = False
         self.game_won = False
         self._build_entities()
@@ -61,6 +64,7 @@ class GameEngine:
     def restart(self):
         self.lives = self.max_lives
         self.score = 0
+        self.time_remaining = self.attempt_time_limit
         self.game_over = False
         self.game_won = False
         self._build_entities()
@@ -78,29 +82,50 @@ class GameEngine:
             elif key == pygame.K_RIGHT:
                 self.frog.move(1, 0)
 
-    def update(self):
+    def _handle_life_lost(self):
+        self.lives -= 1
+        self.frog.reset()
+        self.time_remaining = self.attempt_time_limit
+        if self.lives <= 0:
+            self.lives = 0
+            self.time_remaining = 0.0
+            self.game_over = True
+
+    def update(self, dt=1 / 60.0):
         for v in self.vehicles:
             v.update(road_width_px=WIDTH)
 
         if not self.game_over and not self.game_won:
-            if check_collision(self.frog, self.vehicles):
-                self.lives -= 1
-                self.frog.reset()
-                if self.lives <= 0:
-                    self.lives = 0
-                    self.game_over = True
+            # 30-second countdown for the current attempt
+            self.time_remaining -= dt
+            if self.time_remaining <= 0:
+                self._handle_life_lost()
+                return
 
+            # Collision detection with road vehicles
+            if check_collision(self.frog, self.vehicles):
+                self._handle_life_lost()
+                return
+
+            # Goal reached
             if self.frog.row == GOAL_ROW:
-                self.score += 100
+                time_bonus = int(round(self.time_remaining)) * 10
+                self.score += 100 + time_bonus
                 self.game_won = True
 
     def draw(self, surface, font):
         from game import renderer
         renderer.draw_scene(surface, self.frog, self.vehicles)
-        renderer.draw_text(surface, font, f"Lives: {self.lives}   Score: {self.score}", (10, 12))
+
+        # HUD displaying Lives, Score, and 30-Second Countdown Timer
+        seconds_left = max(0, int(self.time_remaining))
+        hud_text = f"Lives: {self.lives}   Score: {self.score}   Time: {seconds_left:02d}s"
+        time_color = (255, 100, 100) if seconds_left <= 5 else (255, 255, 255)
+        renderer.draw_text(surface, font, hud_text, (10, 12), color=time_color)
+
         renderer.draw_text(surface, font, "Arrow keys to move. R to restart.", (10, HEIGHT - 24))
 
         if self.game_won:
-            renderer.draw_banner(surface, font, f"YOU WON! Score: {self.score} - Press R to Restart")
+            renderer.draw_banner(surface, font, f"YOU WON! Final Score: {self.score} - Press R to Restart")
         elif self.game_over:
             renderer.draw_banner(surface, font, f"GAME OVER! Score: {self.score} - Press R to Restart")
