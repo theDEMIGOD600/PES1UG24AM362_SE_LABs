@@ -20,7 +20,9 @@ class GameEngine:
     def __init__(self):
         self.max_lives = 3
         self.lives = self.max_lives
+        self.score = 0
         self.game_over = False
+        self.game_won = False
         self._build_entities()
 
     def _build_entities(self):
@@ -58,13 +60,15 @@ class GameEngine:
 
     def restart(self):
         self.lives = self.max_lives
+        self.score = 0
         self.game_over = False
+        self.game_won = False
         self._build_entities()
 
     def handle_keydown(self, key):
         if key == pygame.K_r:
             self.restart()
-        elif not self.game_over:
+        elif not self.game_over and not self.game_won:
             if key == pygame.K_UP:
                 self.frog.move(0, -1)
             elif key == pygame.K_DOWN:
@@ -78,7 +82,7 @@ class GameEngine:
         for v in self.vehicles:
             v.update(road_width_px=WIDTH)
 
-        if not self.game_over:
+        if not self.game_over and not self.game_won:
             if check_collision(self.frog, self.vehicles):
                 self.lives -= 1
                 self.frog.reset()
@@ -87,13 +91,16 @@ class GameEngine:
                     self.game_over = True
 
             if self.frog.row == GOAL_ROW:
-                self.frog.reset()
+                self.score += 100
+                self.game_won = True
 
     def draw(self, surface, font):
         from game import renderer
         renderer.draw_scene(surface, self.frog, self.vehicles)
-        renderer.draw_text(surface, font, f"Lives: {self.lives}", (10, 12))
+        renderer.draw_text(surface, font, f"Lives: {self.lives}   Score: {self.score}", (10, 12))
         renderer.draw_text(surface, font, "Arrow keys to move. R to restart.", (10, HEIGHT - 24))
 
-        if self.game_over:
-            renderer.draw_banner(surface, font, "GAME OVER! Press R to Restart")
+        if self.game_won:
+            renderer.draw_banner(surface, font, f"YOU WON! Score: {self.score} - Press R to Restart")
+        elif self.game_over:
+            renderer.draw_banner(surface, font, f"GAME OVER! Score: {self.score} - Press R to Restart")
