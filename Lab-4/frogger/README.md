@@ -61,11 +61,11 @@ Add a 30-second countdown for each attempt and handle timeout appropriately.
 
 ## 5. Submission Checklist
 
-- [ ] All 4 tasks are completed.
-- [ ] The game runs without errors.
-- [ ] A 10-second video of the game before your changes, showing the original bug/broken behaviour.
-- [ ] A 10-second video of the game after your changes, showing the completed functionality.
-- [ ] Link to the Chat/LLM page containing the complete chat history used during development.
+- [x] All 4 tasks are completed.
+- [x] The game runs without errors.
+- [ ] A 10-second video of the game before your changes, showing the original bug/broken behaviour (saved in Lab-4/videos/before_video.mp4).
+- [ ] A 10-second video of the game after your changes, showing the completed functionality (saved in Lab-4/videos/after_video.mp4).
+- [x] Link / file containing the complete chat history used during development (Lab-4/Lab_4_Chat_History.pdf & .docx).
 
 ---
 
