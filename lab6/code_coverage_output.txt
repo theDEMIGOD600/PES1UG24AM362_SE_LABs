@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.0, pytest-8.3.4, pluggy-1.5.0
+rootdir: /Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab6
+plugins: anyio-4.14.0, cov-7.1.0, langsmith-0.14.4, platformdirs-4.13.3, locust-2.46.6
+collected 17 items
+
+CodeCoverageTest_income_tax.py .................                         [100%]
+
+============================== 17 passed in 0.02s ==============================
+Name                             Stmts   Miss  Cover   Missing
+--------------------------------------------------------------
+CodeCoverageTest_income_tax.py      39      0   100%
+income_tax.py                       39      0   100%
+--------------------------------------------------------------
+TOTAL                               78      0   100%
