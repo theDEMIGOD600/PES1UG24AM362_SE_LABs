@@ -1,0 +1,9 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.0, pytest-8.3.4, pluggy-1.5.0
+rootdir: /Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7
+plugins: anyio-4.14.0, hypothesis-6.170.15, cov-7.1.0, langsmith-0.14.4, platformdirs-4.13.3, locust-2.46.6
+collected 3 items
+
+test_income_tax_parser.py ...                                            [100%]
+
+============================== 3 passed in 0.29s ===============================

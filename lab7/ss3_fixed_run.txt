@@ -1,0 +1,8 @@
+==== Running clean_pan ====
+Enter a PAN (e.g. abcde 1234f): Cleaned PAN: ABCDE1234F
+
+==== Running parse_amount ====
+Enter an amount (e.g. Rs 12,50,000): Amount in rupees: 1250000
+
+==== Running parse_tax_slab ====
+Enter a tax slab as LOW-HIGH:RATE (e.g. 250000-500000:5): Tax slab (low, high, rate): (250000, 500000, 5)

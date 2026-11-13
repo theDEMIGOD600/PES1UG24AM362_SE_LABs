@@ -1,0 +1,321 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.0, pytest-8.3.4, pluggy-1.5.0
+rootdir: /Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7
+plugins: anyio-4.14.0, hypothesis-6.170.15, cov-7.1.0, langsmith-0.14.4, platformdirs-4.13.3, locust-2.46.6
+collected 3 items
+
+test_income_tax_parser.py FFF                                            [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_clean_pan_no_crash ____________________________
+
+s = None
+
+    @given(st.text() | st.none())
+    def test_clean_pan_no_crash(s):
+        try:
+>           clean_pan(s)
+
+test_income_tax_parser.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pan = None
+
+    def clean_pan(pan):
+        """
+        Removes spaces from a PAN and upper-cases it.
+        Assumes pan is a non-empty string.
+        """
+>       return pan.strip().replace(' ', '').upper()
+E       AttributeError: 'NoneType' object has no attribute 'strip'
+
+income_tax_parser.py:6: AttributeError
+
+During handling of the above exception, another exception occurred:
+
+    @given(st.text() | st.none())
+>   def test_clean_pan_no_crash(s):
+
+test_income_tax_parser.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+s = None
+
+    @given(st.text() | st.none())
+    def test_clean_pan_no_crash(s):
+        try:
+            clean_pan(s)
+        except Exception as e:
+>           assert False, f"clean_pan crashed with: {e}"
+E           AssertionError: clean_pan crashed with: 'NoneType' object has no attribute 'strip'
+E           assert False
+E           Failing test case: test_clean_pan_no_crash(
+E               s=None,
+E           )
+E           Explanation:
+E               These lines were always and only run by failing test cases:
+E                   /Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py:8
+
+test_income_tax_parser.py:9: AssertionError
+__________________________ test_parse_amount_no_crash __________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 341, in from_call
+  |     result: TResult | None = func()
+  |                              ~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 242, in <lambda>
+  |     lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+  |             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 182, in _multicall
+  |     return outcome.get_result()
+  |            ~~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_result.py", line 100, in get_result
+  |     raise exc.with_traceback(exc.__traceback__)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/threadexception.py", line 92, in pytest_runtest_call
+  |     yield from thread_exception_runtest_hook()
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/threadexception.py", line 68, in thread_exception_runtest_hook
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/unraisableexception.py", line 95, in pytest_runtest_call
+  |     yield from unraisable_exception_runtest_hook()
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/unraisableexception.py", line 70, in unraisable_exception_runtest_hook
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/logging.py", line 846, in pytest_runtest_call
+  |     yield from self._runtest_for(item, "call")
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/logging.py", line 829, in _runtest_for
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/capture.py", line 880, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/skipping.py", line 257, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 174, in pytest_runtest_call
+  |     item.runtest()
+  |     ~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/python.py", line 1627, in runtest
+  |     self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+  |     raise exception.with_traceback(exception.__traceback__)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/python.py", line 159, in pytest_pyfunc_call
+  |     result = testfunction(**testargs)
+  |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 12, in test_parse_amount_no_crash
+  |     def test_parse_amount_no_crash(s):
+  |                    ^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/hypothesis/core.py", line 2334, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 14, in test_parse_amount_no_crash
+    |     parse_amount(s)
+    |     ~~~~~~~~~~~~^^^
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/income_tax_parser.py", line 14, in parse_amount
+    |     return int(text)
+    | ValueError: invalid literal for int() with base 10: ''
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 16, in test_parse_amount_no_crash
+    |     assert False, f"parse_amount crashed with: {e}"
+    | AssertionError: parse_amount crashed with: invalid literal for int() with base 10: ''
+    | assert False
+    | Failing test case: test_parse_amount_no_crash(
+    |     s='',  # or any other generated value
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 14, in test_parse_amount_no_crash
+    |     parse_amount(s)
+    |     ~~~~~~~~~~~~^^^
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/income_tax_parser.py", line 13, in parse_amount
+    |     text = text.replace('Rs', '').replace(',', '').strip()
+    |            ^^^^^^^^^^^^
+    | AttributeError: 'NoneType' object has no attribute 'replace'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 16, in test_parse_amount_no_crash
+    |     assert False, f"parse_amount crashed with: {e}"
+    | AssertionError: parse_amount crashed with: 'NoneType' object has no attribute 'replace'
+    | assert False
+    | Failing test case: test_parse_amount_no_crash(
+    |     s=None,  # or any other generated value
+    | )
+    +------------------------------------
+_________________________ test_parse_tax_slab_no_crash _________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 341, in from_call
+  |     result: TResult | None = func()
+  |                              ~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 242, in <lambda>
+  |     lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+  |             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 182, in _multicall
+  |     return outcome.get_result()
+  |            ~~~~~~~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_result.py", line 100, in get_result
+  |     raise exc.with_traceback(exc.__traceback__)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/threadexception.py", line 92, in pytest_runtest_call
+  |     yield from thread_exception_runtest_hook()
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/threadexception.py", line 68, in thread_exception_runtest_hook
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/unraisableexception.py", line 95, in pytest_runtest_call
+  |     yield from unraisable_exception_runtest_hook()
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/unraisableexception.py", line 70, in unraisable_exception_runtest_hook
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/logging.py", line 846, in pytest_runtest_call
+  |     yield from self._runtest_for(item, "call")
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/logging.py", line 829, in _runtest_for
+  |     yield
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/capture.py", line 880, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/skipping.py", line 257, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/runner.py", line 174, in pytest_runtest_call
+  |     item.runtest()
+  |     ~~~~~~~~~~~~^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/python.py", line 1627, in runtest
+  |     self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+  |     raise exception.with_traceback(exception.__traceback__)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/pluggy/_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/_pytest/python.py", line 159, in pytest_pyfunc_call
+  |     result = testfunction(**testargs)
+  |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 19, in test_parse_tax_slab_no_crash
+  |     def test_parse_tax_slab_no_crash(s):
+  |                    ^^^
+  |   File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/hypothesis/core.py", line 2334, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 3 distinct failures. (3 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 21, in test_parse_tax_slab_no_crash
+    |     parse_tax_slab(s)
+    |     ~~~~~~~~~~~~~~^^^
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/income_tax_parser.py", line 22, in parse_tax_slab
+    |     low, high = limits.split('-')
+    |     ^^^^^^^^^
+    | ValueError: not enough values to unpack (expected 2, got 1)
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 23, in test_parse_tax_slab_no_crash
+    |     assert False, f"parse_tax_slab crashed with: {e}"
+    | AssertionError: parse_tax_slab crashed with: not enough values to unpack (expected 2, got 1)
+    | assert False
+    | Failing test case: test_parse_tax_slab_no_crash(
+    |     s=':',
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 21, in test_parse_tax_slab_no_crash
+    |     parse_tax_slab(s)
+    |     ~~~~~~~~~~~~~~^^^
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/income_tax_parser.py", line 21, in parse_tax_slab
+    |     limits, rate = line.split(':')
+    |     ^^^^^^^^^^^^
+    | ValueError: not enough values to unpack (expected 2, got 1)
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 23, in test_parse_tax_slab_no_crash
+    |     assert False, f"parse_tax_slab crashed with: {e}"
+    | AssertionError: parse_tax_slab crashed with: not enough values to unpack (expected 2, got 1)
+    | assert False
+    | Failing test case: test_parse_tax_slab_no_crash(
+    |     s='',  # or any other generated value
+    | )
+    +---------------- 3 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 21, in test_parse_tax_slab_no_crash
+    |     parse_tax_slab(s)
+    |     ~~~~~~~~~~~~~~^^^
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/income_tax_parser.py", line 21, in parse_tax_slab
+    |     limits, rate = line.split(':')
+    |                    ^^^^^^^^^^
+    | AttributeError: 'NoneType' object has no attribute 'split'
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/thedemigod/Documents/PESU/software_engineering/PES1UG24AM362_SE_LABs/lab7/test_income_tax_parser.py", line 23, in test_parse_tax_slab_no_crash
+    |     assert False, f"parse_tax_slab crashed with: {e}"
+    | AssertionError: parse_tax_slab crashed with: 'NoneType' object has no attribute 'split'
+    | assert False
+    | Failing test case: test_parse_tax_slab_no_crash(
+    |     s=None,  # or any other generated value
+    | )
+    +------------------------------------
+=========================== short test summary info ============================
+FAILED test_income_tax_parser.py::test_clean_pan_no_crash - AssertionError: c...
+FAILED test_income_tax_parser.py::test_parse_amount_no_crash - ExceptionGroup...
+FAILED test_income_tax_parser.py::test_parse_tax_slab_no_crash - ExceptionGro...
+============================== 3 failed in 2.15s ===============================
